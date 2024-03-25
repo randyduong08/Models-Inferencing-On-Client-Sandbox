@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TranscriptPageComponent } from './transcript-page.component';
+import { DetectionComponent } from './detection.component';
 
-describe('TranscriptPageComponent', () => {
-  let component: TranscriptPageComponent;
-  let fixture: ComponentFixture<TranscriptPageComponent>;
+describe('DetectionComponent', () => {
+  let component: DetectionComponent;
+  let fixture: ComponentFixture<DetectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TranscriptPageComponent]
+      imports: [DetectionComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(TranscriptPageComponent);
+    fixture = TestBed.createComponent(DetectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
