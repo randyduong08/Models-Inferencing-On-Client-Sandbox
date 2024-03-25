@@ -1,29 +1,36 @@
-<div hlmAccordion>
-    <div hlmAccordionItem>
-        <button hlmAccordionTrigger>
-            Is it accessible?
-            <hlm-icon hlmAccIcon />
-        </button>
-        <brn-accordion-content hlm>Yes. It adheres to the WAI-ARIA design pattern.</brn-accordion-content>
-    </div>
+<header class="flex justify-center">
+  <nav class="rounded-full bg-black text-white px-4 py-2 flex gap-4">
+    <a matRipple class="hover:bg-gray-700 px-4 py-2 rounded-full" 
+    routerLink="/landing"
+    routerLinkActive="activebutton"
+    ariaCurrentWhenActive="page">
+    Home
+    </a>
+    <a matRipple class="hover:bg-gray-700 px-4 py-2 rounded-full" 
+        routerLink="/sentiment"
+        routerLinkActive="activebutton"
+        ariaCurrentWhenActive="page">
+        Sentiment
+    </a>
+    <a matRipple class="hover:bg-gray-700 px-4 py-2 rounded-full" 
+        routerLink="/transcript"
+        routerLinkActive="activebutton"
+        ariaCurrentWhenActive="page">
+        Transcript
+    </a>
+    <a matRipple class="hover:bg-gray-700 px-4 py-2 rounded-full" 
+        routerLink="/detection"
+        routerLinkActive="activebutton"
+        ariaCurrentWhenActive="page">
+        Detection
+    </a>
 
-    <div hlmAccordionItem>
-        <button hlmAccordionTrigger>
-            Is it styled?
-            <hlm-icon hlmAccIcon />
-        </button>
-        <brn-accordion-content hlm>
-            Yes. It comes with default styles that match the other components' aesthetics.
-        </brn-accordion-content>
-    </div>
-
-    <div hlmAccordionItem>
-        <button hlmAccordionTrigger>
-            Is it animated?
-            <hlm-icon hlmAccIcon />
-        </button>
-        <brn-accordion-content hlm>
-            Yes. It's animated by default, but you can disable it if you prefer.
-        </brn-accordion-content>
-    </div>
-</div>
+    <button mat-button [matMenuTriggerFor]="menu">Products</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Item 1</button>
+      <button mat-menu-item>Item 2</button>
+      <button mat-menu-item>Item 3</button>
+    </mat-menu>
+    
+  </nav>
+</header>
