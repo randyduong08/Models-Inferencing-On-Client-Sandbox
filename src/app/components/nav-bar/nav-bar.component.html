@@ -1,1 +1,15 @@
-<p>Navbar</p>
+<header class="flex justify-center">
+  <nav class="rounded-full bg-black text-white px-4 py-2 flex gap-4">
+    <a matRipple class="hover:bg-gray-700 px-4 py-2 rounded-full" routerLink="/Sentiment">Sentiment</a>
+    <a matRipple class="hover:bg-gray-700 px-4 py-2 rounded-full" routerLink="/Transcript">Transcript</a>
+    <a matRipple class="hover:bg-gray-700 px-4 py-2 rounded-full" routerLink="/Detection">Detection</a>
+
+    <button mat-button [matMenuTriggerFor]="menu">Products</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Item 1</button>
+      <button mat-menu-item>Item 2</button>
+      <button mat-menu-item>Item 3</button>
+    </mat-menu>
+    
+  </nav>
+</header>
