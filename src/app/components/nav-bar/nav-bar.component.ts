@@ -1,6 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import {MatMenuModule} from '@angular/material/menu';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 
 
 @Component({
@@ -8,7 +8,8 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [
     MatMenuModule,
-    RouterModule
+    RouterLink,
+    RouterLinkActive,
   ],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss',

@@ -1,8 +1,29 @@
 <header class="flex justify-center">
   <nav class="rounded-full bg-black text-white px-4 py-2 flex gap-4">
-    <a matRipple class="hover:bg-gray-700 px-4 py-2 rounded-full" routerLink="/Sentiment">Sentiment</a>
-    <a matRipple class="hover:bg-gray-700 px-4 py-2 rounded-full" routerLink="/Transcript">Transcript</a>
-    <a matRipple class="hover:bg-gray-700 px-4 py-2 rounded-full" routerLink="/Detection">Detection</a>
+    <a matRipple class="hover:bg-gray-700 px-4 py-2 rounded-full" 
+    routerLink="/landing"
+    routerLinkActive="activebutton"
+    ariaCurrentWhenActive="page">
+    Home
+    </a>
+    <a matRipple class="hover:bg-gray-700 px-4 py-2 rounded-full" 
+        routerLink="/sentiment"
+        routerLinkActive="activebutton"
+        ariaCurrentWhenActive="page">
+        Sentiment
+    </a>
+    <a matRipple class="hover:bg-gray-700 px-4 py-2 rounded-full" 
+        routerLink="/transcript"
+        routerLinkActive="activebutton"
+        ariaCurrentWhenActive="page">
+        Transcript
+    </a>
+    <a matRipple class="hover:bg-gray-700 px-4 py-2 rounded-full" 
+        routerLink="/detection"
+        routerLinkActive="activebutton"
+        ariaCurrentWhenActive="page">
+        Detection
+    </a>
 
     <button mat-button [matMenuTriggerFor]="menu">Products</button>
     <mat-menu #menu="matMenu">
