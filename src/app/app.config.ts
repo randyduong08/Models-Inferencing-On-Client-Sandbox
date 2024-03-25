@@ -4,6 +4,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideServiceWorker } from '@angular/service-worker';
 import { provideClientHydration } from '@angular/platform-browser';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideServiceWorker('ngsw-worker.js', {
@@ -12,5 +13,5 @@ export const appConfig: ApplicationConfig = {
     }), provideServiceWorker('ngsw-worker.js', {
         enabled: !isDevMode(),
         registrationStrategy: 'registerWhenStable:30000'
-    }), provideClientHydration()]
+    }), provideClientHydration(), provideAnimationsAsync()]
 };
