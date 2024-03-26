@@ -44,3 +44,12 @@ Thumbs.db
 # python stuff
 sandboxenv/
 *.pyc
+
+# datasets
+polls_sentiments.csv
+
+# safetensors
+*.safetensors
+
+# onnx models
+sentiment.onnx
