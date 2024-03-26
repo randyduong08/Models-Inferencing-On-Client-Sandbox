@@ -55,6 +55,7 @@
     "embla-carousel-angular": "^14.0.0",
     "express": "^4.18.2",
     "ngx-scrollbar": "^13.0.1",
+    "onnxruntime-web": "^1.17.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
