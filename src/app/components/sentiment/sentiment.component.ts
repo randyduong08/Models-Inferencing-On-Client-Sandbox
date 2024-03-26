@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import * as onnx from 'onnxruntime-web';
-import { AutoTokenizer } from '@xenova/transformers';
 
 @Component({
   selector: 'app-sentiment',
@@ -13,6 +12,7 @@ import { AutoTokenizer } from '@xenova/transformers';
 export class SentimentComponent implements OnInit, OnDestroy {
   session!: onnx.InferenceSession;
   options: any;
+  tokenizer: any;
 
   async ngOnInit(): Promise<void> {
     onnx.env.wasm.wasmPaths = "https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/";
