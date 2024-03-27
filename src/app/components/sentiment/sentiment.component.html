@@ -1,4 +1,8 @@
 <p>sentiment works!</p>
 <div class="flex justify-center items-center">
-    <textarea class="min-h-[160px] w-6/12 border-2 border-black" placeholder="Type your message here."></textarea>
+    <textarea 
+    class="min-h-[160px] w-6/12 border-2 border-black" 
+    placeholder="Type your message here."
+    [(ngModel)]="message"
+    (input)="processInput()"></textarea>
 </div>
