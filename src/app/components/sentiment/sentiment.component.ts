@@ -28,7 +28,7 @@ export class SentimentComponent implements OnInit, OnDestroy {
       executionProviders: ['wasm'],
     };
 
-    this.session = await onnx.InferenceSession.create('../../../assets/quant_xtreme_distil_sentiment.onnx', this.options);
+    this.session = await onnx.InferenceSession.create('../../../assets/xtreme_distil_sentiment.onnx', this.options);
 
   }
 
@@ -46,6 +46,8 @@ export class SentimentComponent implements OnInit, OnDestroy {
       token_type_ids[i] = BigInt(0);
     }
 
+    console.log('input ids: ', input_ids);
+
     const model_input_ids = new onnx.Tensor('int64', BigInt64Array.from(input_ids), [1, input_ids.length]);
     const model_attention_mask = new onnx.Tensor('int64', BigInt64Array.from(attention_mask), [1, attention_mask.length]);
     const model_token_type_ids = new onnx.Tensor('int64', BigInt64Array.from(token_type_ids), [1, token_type_ids.length]);
@@ -57,9 +59,19 @@ export class SentimentComponent implements OnInit, OnDestroy {
     }
   }
 
-  sigmoid(t: any): any {
-    return 1/(1/Math.pow(Math.E, -t));
+
+  sigmoid(num: any): any {
+    return 1/(1/Math.pow(Math.E, -num));
   }
+
+
+  softmax(logits: any): Float32Array {
+    const maxLogit = Math.max(...logits);
+    const scores = logits.map((l: number) => Math.exp(l - maxLogit));
+    const sum = scores.reduce((a: any, b: any) => a + b, 0);
+    return scores.map((s: number) => s / sum);
+  }
+
 
   async processInput(): Promise<void> {
     if (this.message.length < 2) return;
@@ -71,10 +83,14 @@ export class SentimentComponent implements OnInit, OnDestroy {
       const modelInputs = this.prepare_onnx_model_inputs(tokenizedInput);
 
       const modelOutput = await this.session.run(modelInputs, ['output_0']);
-      //TODO: FIX THIS --> NEED TO NORMALIZE OUTPUT
-      const probs = modelOutput['output_0'].data.map(this.sigmoid);
+      //TODO: FIX AND TEST ONNX MODEL -- DOESNT SEEM TO WORK...
+      const logits = modelOutput['output_0'].data
 
-      console.log(probs);
+      console.log(logits[0], ' | ', logits[1]);
+
+      const probs = this.softmax(logits);
+
+      console.log('probs: ', probs);
 
       console.log(tokenizedInput);
       console.log('model output:', modelOutput);
