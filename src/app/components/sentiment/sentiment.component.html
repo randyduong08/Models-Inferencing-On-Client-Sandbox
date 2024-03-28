@@ -6,3 +6,8 @@
     [(ngModel)]="message"
     (input)="processInput()"></textarea>
 </div>
+<p>Negative</p>
+<mat-progress-bar class="w-6/12"  mode="determinate" [value]="negativeValue"></mat-progress-bar>
+<br/>
+<p>Positive</p>
+<mat-progress-bar class="w-6/12"  mode="determinate" [value]="positiveValue"></mat-progress-bar>

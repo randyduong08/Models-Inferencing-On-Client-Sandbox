@@ -1,13 +1,18 @@
-import { Component, OnDestroy, OnInit, input } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import * as onnx from 'onnxruntime-web';
 import { PreTrainedTokenizer } from '@xenova/transformers';
 import { FormsModule } from '@angular/forms';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-sentiment',
   standalone: true,
-  imports: [HlmInputDirective, FormsModule],
+  imports: [
+    HlmInputDirective, 
+    FormsModule,
+    MatProgressBarModule,
+  ],
   templateUrl: './sentiment.component.html',
   styleUrl: './sentiment.component.scss'
 })
@@ -16,8 +21,13 @@ export class SentimentComponent implements OnInit, OnDestroy {
   options: any;
   tokenizer!: PreTrainedTokenizer;
   message: string ='';
+  positiveValue: number = 0;
+  negativeValue: number = 0;
+
 
   async ngOnInit(): Promise<void> {
+    this.positiveValue = 0;
+    this.negativeValue = 0;
     onnx.env.wasm.wasmPaths = "https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/";
     
     this.tokenizer = await PreTrainedTokenizer.from_pretrained('bert-base-uncased');
@@ -32,9 +42,11 @@ export class SentimentComponent implements OnInit, OnDestroy {
 
   }
 
+
   ngOnDestroy(): void {
       
   }
+
 
   prepare_onnx_model_inputs(encodings: number[]): any {
     let input_ids = new Array(encodings.length);
@@ -74,7 +86,11 @@ export class SentimentComponent implements OnInit, OnDestroy {
 
 
   async processInput(): Promise<void> {
-    if (this.message.length < 2) return;
+    if (this.message.length < 2) {
+      this.positiveValue = 0;
+      this.negativeValue = 0;
+      return;
+    }
     console.log(this.message);
 
     try {
@@ -83,12 +99,15 @@ export class SentimentComponent implements OnInit, OnDestroy {
       const modelInputs = this.prepare_onnx_model_inputs(tokenizedInput);
 
       const modelOutput = await this.session.run(modelInputs, ['output_0']);
-      //TODO: FIX AND TEST ONNX MODEL -- DOESNT SEEM TO WORK... <- because model itself is bad
+
       const logits = modelOutput['output_0'].data
 
       console.log(logits[0], ' | ', logits[1]);
 
       const probs = this.softmax(logits);
+
+      this.negativeValue = Math.floor(probs[0]*100);
+      this.positiveValue = Math.floor(probs[1]*100);
 
       console.log('probs: ', probs);
 
