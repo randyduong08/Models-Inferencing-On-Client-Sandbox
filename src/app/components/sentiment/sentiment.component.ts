@@ -28,7 +28,7 @@ export class SentimentComponent implements OnInit, OnDestroy {
       executionProviders: ['wasm'],
     };
 
-    this.session = await onnx.InferenceSession.create('../../../assets/xtreme_distil_sentiment.onnx', this.options);
+    this.session = await onnx.InferenceSession.create('../../../assets/quant_xtreme_distil_sentiment.onnx', this.options);
 
   }
 
@@ -83,7 +83,7 @@ export class SentimentComponent implements OnInit, OnDestroy {
       const modelInputs = this.prepare_onnx_model_inputs(tokenizedInput);
 
       const modelOutput = await this.session.run(modelInputs, ['output_0']);
-      //TODO: FIX AND TEST ONNX MODEL -- DOESNT SEEM TO WORK...
+      //TODO: FIX AND TEST ONNX MODEL -- DOESNT SEEM TO WORK... <- because model itself is bad
       const logits = modelOutput['output_0'].data
 
       console.log(logits[0], ' | ', logits[1]);
