@@ -53,3 +53,6 @@ polls_sentiments.csv
 
 # onnx models
 sentiment.onnx
+
+# locally saved large datasets (mostly images)
+datasets/image-face-dataset
