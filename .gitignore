@@ -56,3 +56,7 @@ sentiment.onnx
 
 # locally saved large datasets (mostly images)
 datasets/image-face-dataset
+
+
+# other repos used in this project
+VIA2COCO/
